@@ -14,12 +14,14 @@
       <HBox prefHeight="25.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" text="Add Project" />
-            <Separator prefHeight="22.0" prefWidth="190.0" visible="false" />
+            <Separator prefHeight="22.0" prefWidth="92.0" visible="false" />
             <TextField fx:id="search" promptText="Search" />
-            <Separator layoutX="100.0" layoutY="10.0" prefHeight="22.0" prefWidth="140.0" visible="false" />
-            <Button mnemonicParsing="false" text="Pull Project" onAction="#pull" />
+            <Separator layoutX="100.0" layoutY="10.0" prefHeight="22.0" prefWidth="91.0" visible="false" />
+            <Button mnemonicParsing="false" onAction="#refresh" text="Refresh Projects" />
             <Separator prefHeight="3.0" prefWidth="28.0" />
-            <Button mnemonicParsing="false" text="Push Project" onAction="#push" />
+            <Button mnemonicParsing="false" onAction="#pull" text="Pull Project" />
+            <Separator prefHeight="3.0" prefWidth="28.0" />
+            <Button mnemonicParsing="false" onAction="#push" text="Push Project" />
          </children>
       </HBox>
    </bottom>
@@ -31,11 +33,11 @@
           <TableColumn fx:id="tableProjectGroup" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" text="Group" />
           -->
             <!--&lt;!&ndash;-->
-            <PercentageTableColumn percentageWidth="20" text="Project" fx:id="tableProjectName" />
-            <PercentageTableColumn percentageWidth="20" text="Group" fx:id="tableProjectProject" />
-            <PercentageTableColumn percentageWidth="20" text="Group" fx:id="tableProjectGroup" />
-            <PercentageTableColumn percentageWidth="20" text="Group" fx:id="tableProjectDestination" />
-            <PercentageTableColumn percentageWidth="20" text="Status" fx:id="tableProjectStatus" />
+            <PercentageTableColumn percentageWidth="22.5" text="Name" fx:id="tableProjectName" />
+            <PercentageTableColumn percentageWidth="22.5" text="Project" fx:id="tableProjectProject" />
+            <PercentageTableColumn percentageWidth="22.5" text="Group" fx:id="tableProjectGroup" />
+            <PercentageTableColumn percentageWidth="22.5" text="Destination" fx:id="tableProjectDestination" />
+            <PercentageTableColumn percentageWidth="10" text="Status" fx:id="tableProjectStatus" />
             <!--&ndash;&gt;-->
         </columns>
       </TableView>

@@ -46,6 +46,7 @@ public class OverviewController {
     @FXML
     private TextField search;
 
+    private       FilteredList<ProjectViewModel>   filteredData;
     private       ObservableList<ProjectViewModel> data;
     private final Host                             host;
     private final List<Project>                    projects;
@@ -65,15 +66,16 @@ public class OverviewController {
 
     @FXML
     public void initialize() {
-        this.refresh();
+        data = FXCollections.observableArrayList();
 
         tableProjectGroup.setCellValueFactory(new PropertyValueFactory<>("group"));
-        tableProjectName.setCellValueFactory(new PropertyValueFactory<>("project"));
+        tableProjectName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tableProjectProject.setCellValueFactory(new PropertyValueFactory<>("project"));
         tableProjectDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
         tableProjectStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        FilteredList<ProjectViewModel> filteredData = new FilteredList<>(data, p -> true);
+        filteredData = new FilteredList<>(data, p -> true);
+
         search.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(myObject -> {
             if (newValue == null || newValue.isEmpty()) {
                 return true;
@@ -84,17 +86,20 @@ public class OverviewController {
             return String.valueOf(myObject.getName()).toLowerCase().contains(lowerCaseFilter) || String.valueOf(myObject.getProject()).toLowerCase().contains(lowerCaseFilter) || String.valueOf(myObject.getGroup()).toLowerCase().contains(lowerCaseFilter);
         }));
 
+        this.refresh(null);
+    }
+
+    public void refresh(ActionEvent event) {
+        data.clear();
+
+        for (Project p : this.projects) {
+            data.add(new ProjectViewModel(p));
+        }
+
         SortedList<ProjectViewModel> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(tableView.comparatorProperty());
 
         tableView.setItems(sortedData);
-    }
-
-    private void refresh() {
-        data = FXCollections.observableArrayList();
-        for (Project p : this.projects) {
-            data.add(new ProjectViewModel(p));
-        }
     }
 
     public void pull(ActionEvent event) {
