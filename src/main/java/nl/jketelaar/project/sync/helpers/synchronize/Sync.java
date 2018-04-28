@@ -29,7 +29,7 @@ public abstract class Sync {
     }
 
     public String getHostSource(Project project) {
-        return this.host.getBasePath() + "/" + project.getGroup() + "/" + project.getProject().replace(" ", "\\ ") + "/./";
+        return this.host.getBasePath() + "/" + project.getGroup() + "/" + project.getProject().replace(" ", "\\ ") + "/";
     }
 
     public String getLocalSource(Project project) {
