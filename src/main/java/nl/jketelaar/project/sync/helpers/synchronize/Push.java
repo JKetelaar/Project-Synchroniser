@@ -19,6 +19,7 @@ public class Push extends Sync {
                 .recursive(true)
                 .exclude("@eaDir", "thumbs.db", ".DS_Store")
                 .perms(true)
+                .delete(true)
                 .progress(true);
     }
 
